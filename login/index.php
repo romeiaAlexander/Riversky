@@ -1,3 +1,10 @@
+<?php 
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan']=="gagal"){
+			echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
+		}
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,14 +12,6 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body> 
-	<?php 
-	if(isset($_GET['pesan'])){
-		if($_GET['pesan']=="gagal"){
-			echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
-		}
-	}
-	?>
- 
 	<div class="kotak_login">
 		<p class="tulisan_login">Silahkan login</p>
  
