@@ -1,0 +1,248 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* End CSS Reset */
+
+/* Style CSS  */
+
+/* Body */
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #ffffff;
+  background-color: #33414f;
+  /* /* background-image: url('../img/Logo.png');
+  background-position: center;
+  background-size: 60%;
+  background-attachment: fixed; 
+  background-repeat: no-repeat;
+  filter: alpha(opacity=0.5); */
+}
+/* Judul */
+.judul {
+  font-size: 60px;
+  text-align: left;
+  padding: 25px;
+  /* background-color: #ffffffc4; */
+  margin-left: 25px;
+  margin-right: 25px;
+  border-radius: 3px;
+}
+
+.judul h1 {
+  color: #ffffff;
+}
+
+.judul img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: -16px;
+}
+.text-start.p-3.ms-5 a img {
+}
+
+
+#underline {
+  background-color: #439fd4;
+  width: 375px;
+  margin-top: 5px;
+  margin-left: 65px;
+  font-size: 3px;
+}
+
+/* Navigasi */
+#nav-menu {
+  padding-top: 0px;
+  padding-left: 0px;
+  background-color: #439fd4;
+  border-color: #00a2ff;
+}
+
+#nav-menu #navigasi {
+  padding-right: 0px;
+  /* background-color: #878c8c; */
+  border: 3px;
+  border-radius: 10px;
+}
+
+#nav-menu li {
+  padding: 13px;
+}
+
+#nav-menu a {
+  font-size: 20px;
+  color: #0a0a0a;
+  text-decoration: none;
+  border: 2px solid #0a0a0a;
+  border-radius: 20px;
+  padding: 6px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#nav-menu a:hover {
+  background-color: #dce2e3;
+  transition: all 0.5s ease;
+}
+
+/* Content */
+#konten {
+  padding: 25px;
+  padding-top: 15px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+#konten #text h1 {
+  background-color: rgb(70, 86, 105);
+  font-size: 30px;
+  padding: 10px;
+  padding-left: 25px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+#konten #konten1 h1 {
+  font-size: 30px;
+  padding: 10px;
+  padding-left: 25px;
+  background-color: #2f5370;
+  border-radius: 3px;
+  text-decoration: underline;
+}
+
+#konten p {
+  margin-top: 15px;
+  margin-bottom: 25px;
+  padding: 1px;
+  border-radius: 4px;
+}
+
+/* Footer */
+#footer {
+  background-color: #00a2ff;
+  margin-bottom: 50px;
+}

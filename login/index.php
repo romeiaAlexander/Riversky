@@ -5,32 +5,44 @@
 		}
 	}
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Riversky</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body> 
-	<div class="kotak_login">
-		<p class="tulisan_login">Silahkan login</p>
- 
-		<form action="home.php" method="post">
-			<label>Username</label>
-			<input type="text" name="username" class="form_login" placeholder="Username .." required="required">
- 
-			<label>Password</label>
-			<input type="password" name="password" class="form_login" placeholder="Password .." required="required">
- 
-			<input type="submit" class="tombol_login" value="LOGIN">
- 
-			<br/>
-			<br/>
 
-		</form>
-		
-	</div>
- 
- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Riversky</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="header">
+                <header><img src="logo4.png" alt="logo"></header>
+                <p>Welcome to Riversky</p>
+
+                <form action="home.php" method="post">
+                    
+            </div>
+            <div class="input-box">
+                <label for="email">E-mail</label>
+                <input type="text" class="input-field" id="email" required>
+                <i class="bx bx-envelope"></i>
+            </div>
+            <div class="input-box">
+                <label for="pass">Password</label>
+                <input type="password" class="input-field" id="pass" required>
+                <i class="bx bx-lock"></i>
+            </div>
+            <div class="input-box">
+                <input type="submit" class="input-submit" value="Sign In">
+            </div>
+            <div class="bottom">
+                <span><a href="#">Sign Up</a></span>
+                <span><a href="#">Forget Password</a></span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
