@@ -45,7 +45,7 @@
         <img src="assets/images/a.jpg" class="d-block w-100" alt="foto pencapaian">
       </div>
       <div class="carousel-item">
-        <img src="assets.images/a.jpg" class="d-block w-100" alt="foto pencapaian">
+        <img src="assets/images/a.jpg" class="d-block w-100" alt="foto pencapaian">
       </div>
       <div class="carousel-item">
         <img src="assets/images/a.jpg" class="d-block w-100" alt="foto pencapaian">

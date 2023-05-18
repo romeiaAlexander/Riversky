@@ -59,6 +59,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#contactLink">Contact</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.php?river=login"> login </a>
+                </li>
               </ul>
             </div>
             <div class="quote_btn-container ">
@@ -132,7 +135,10 @@
 				break;
 			case 'service':
 				include "page/service.php";
-				break;			
+				break;
+      case 'login':
+        include "page/login.php";
+        break;			
 			default:
 				echo "<center><h3>Maaf. Halaman tidak di temukan !</h3></center>";
 				break;
