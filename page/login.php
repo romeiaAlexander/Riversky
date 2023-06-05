@@ -20,8 +20,14 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         if (mysqli_num_rows($login) > 0) {
             $_SESSION['username'] = $username;
             ob_end_clean();
+<<<<<<< HEAD
             header("Location: admin/index.php");
             exit();
+=======
+            //header("Location: admin/index.php");
+            echo "<script>window.location.href='admin/index.php'</script>";
+            //exit();
+>>>>>>> 02fcbb82a7bdd9783316424b7de0a13eacd5efc4
         } else {
             echo "<script>alert('Username atau Password anda salah')</script>";
             echo "<meta http-equiv='refresh' content='1 url=index.php'>";
