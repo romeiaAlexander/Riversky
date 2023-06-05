@@ -13,10 +13,13 @@ if(isset($_POST["submit"])){
     if($password == $repassword){
       $query = "insert into tb_mahasiswa values('', '$username', '$email', MD5('$password'))";
       mysqli_query($conn, $query);
-      echo header("location:index.php?river=login");
-      echo "<script>alert('terregisterasi');</script>";
+      echo "<script>alert('Registrasi berhasil')</script>";
+      echo "<meta http-equiv='refresh' content='1 url=index.php'>";
+      exit();
     }else{
-      echo "<script>alert('password tidak sama');</script>";
+      echo "<script>alert('Registrasi gagal')</script>";
+      echo "<meta http-equiv='refresh' content='1 url=register.php'>";
+      exit();
     }
   }
 }

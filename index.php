@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once 'config/config.php';
+?>
 <html><head>
   <!-- Basic -->
   <meta charset="utf-8">
