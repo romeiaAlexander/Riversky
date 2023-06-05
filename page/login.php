@@ -1,22 +1,25 @@
-<?php 
-require_once "config/config.php"; 
-// menangkap data yang dikirim dari form
-$username = $_POST['username'];
-$password = $_POST['password'];
- 
-// menyeleksi data admin dengan username dan password yang sesuai
-$data = mysqli_query($conn,"select * from tb_mahasiswa where username='$username' and password='$password'");
- 
-// menghitung jumlah data yang ditemukan
-$cek = mysqli_num_rows($data);
- 
-if($cek > 0){
-	$_SESSION['username'] = $username;
-	$_SESSION['status'] = "login";
-	header("location:admin/index.php");
-}else{
-	header("location:index.php?pesan=gagal");
-}
+
+<?php
+include "config/config.php";
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+    if (empty($username)) {
+        echo "<script>alert('Username belum diisi')</script>";
+        echo "<meta http-equiv='refresh' content='1 url=index.php'>";
+    } else if (empty($password)) {
+        echo "<script>alert('Password belum diisi')</script>";
+        echo "<meta http-equiv='refresh' content='1 url=index.php'>";
+    } else {
+        $login = mysqli_query($conn, "select * from tb_mahasiswa where username='$username' and password='$password'");
+        if (mysqli_num_rows($login) > 0) {
+            $_SESSION['username'] = $username;
+            header("location: admin/index.php");
+        } else {
+            echo "<script>alert('Username atau Password anda salah')</script>";
+            echo "<meta http-equiv='refresh' content='1 url=index.php'>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
