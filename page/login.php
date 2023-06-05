@@ -1,26 +1,39 @@
-
 <?php
+ob_start();
 include "config/config.php";
+
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = md5($_POST['password']);
+
     if (empty($username)) {
         echo "<script>alert('Username belum diisi')</script>";
         echo "<meta http-equiv='refresh' content='1 url=index.php'>";
+        exit();
     } else if (empty($password)) {
         echo "<script>alert('Password belum diisi')</script>";
         echo "<meta http-equiv='refresh' content='1 url=index.php'>";
+        exit();
     } else {
-        $login = mysqli_query($conn, "select * from tb_mahasiswa where username='$username' and password='$password'");
+        $login = mysqli_query($conn, "SELECT * FROM tb_mahasiswa WHERE username='$username' AND password='$password'");
+
         if (mysqli_num_rows($login) > 0) {
             $_SESSION['username'] = $username;
-            header("location: admin/index.php");
+            ob_end_clean();
+            header("Location: admin/index.php");
+            exit();
         } else {
             echo "<script>alert('Username atau Password anda salah')</script>";
             echo "<meta http-equiv='refresh' content='1 url=index.php'>";
+            exit();
         }
     }
+}
+
+ob_end_flush();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
