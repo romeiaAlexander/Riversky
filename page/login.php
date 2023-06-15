@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> coder
 ob_start();
 include "config/config.php";
 
@@ -18,7 +21,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     } else {
         $login = mysqli_query($conn, "SELECT * FROM login WHERE username='$username' AND password='$password'");
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> coder
         if (mysqli_num_rows($login) > 0) {
             $_SESSION['username'] = $username;
             ob_end_clean();
@@ -34,6 +40,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 ob_end_flush();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +74,11 @@ ob_end_flush();
             </div>
             <div class="input-box">
                 <input type="submit" class="input-submit" value="Login">
+<<<<<<< HEAD
               </div>
+=======
+            </div>
+>>>>>>> coder
         </div>
     </div>
 </body>
