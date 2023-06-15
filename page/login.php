@@ -15,7 +15,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         echo "<meta http-equiv='refresh' content='1 url=index.php'>";
         exit();
     } else {
-        $login = mysqli_query($conn, "SELECT * FROM tb_mahasiswa WHERE username='$username' AND password='$password'");
+        $login = mysqli_query($conn, "SELECT * FROM login WHERE username='$username' AND password='$password'");
+
 
         if (mysqli_num_rows($login) > 0) {
             $_SESSION['username'] = $username;
@@ -66,11 +67,7 @@ ob_end_flush();
             </div>
             <div class="input-box">
                 <input type="submit" class="input-submit" value="Login">
-            </div>
-            <div class="bottom">
-                <p>Belum mempunyai akun?</p>
-                <span><a href="register.php">Sign Up</a></span>
-            </div>
+              </div>
         </div>
     </div>
 </body>
