@@ -1,28 +1,6 @@
 <?php
-session_start();
-include('config.php'); // file koneksi ke database
-
-if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tanggal_lahir']) && isset($_POST['jenis_kelamin'])) {
-    $nama_mahasiswa = $_POST['nama_mahasiswa'];
-    $nim = $_POST['nim'];
-    $tanggal_lahir = $_POST['tanggal_lahir'];
-    $jenis_kelamin = $_POST['jenis_kelamin'];
-
-    // cek apakah username sudah ada di database
-    $query = "SELECT * FROM mahasiswa WHERE nim='$nim'";
-    $result = mysqli_query($conn, $query);
-
-    if (mysqli_num_rows($result) > 0) {
-        echo "<script>alert('Mahasiswa dengan NIM tersebut telah terdaftar.'); document.location.href = '/apotech/admin/daftar_produk.php'</script>";
-        exit();
-    } else {
-        $insert = "INSERT INTO mahasiswa (nama_mahasiswa, nim, tanggal_lahir, jenis_kelamin) VALUES ('$nama_mahasiswa', '$nim', '$tanggal_lahir', '$jenis_kelamin')";
-        mysqli_query($conn, $insert);
-        echo "<script>alert('Data mahasiswa baru berhasil ditambahkan!'); document.location.href = '/Riversky/admin/mahasiswa.php'</script>";
-    }
-}
+include('config.php')
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,10 +34,7 @@ if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tan
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div>
+
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -262,7 +237,6 @@ if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tan
                             <i class="nav-icon fas fa-table"></i>
                             <p>
                                 Tabel Mahasiswa
-
                             </p>
                         </a>
                     </li>
@@ -280,7 +254,7 @@ if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tan
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Tambah Mahasiswa</h1>
+                        <h1 class="m-0">Tabel Mahasiswa</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -299,58 +273,59 @@ if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tan
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-lg-12 position-static">
-                        <form action="mahasiswa.php" method="POST">
-                            <div class="mb-3">
-                                <label for="nim" class="form-label">Nomor Induk Mahasiswa</label>
-                                <input type="text" name="nim" class="form-control" id="nim">
-                            </div>
-                            <div class="mb-3">
-                                <label for="nama_mahasiswa" class="form-label">Nama mahasiswa</label>
-                                <input type="text" name="nama_mahasiswa" class="form-control" id="nama_mahasiswa">
-                            </div>
-                            <div class="mb-3">
-                                <label for="tanggal_lahir" class="form-label">Tanggal lahir</label>
-                                <input type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir">
-                            </div>
-                            <div class="mb-3">
-                                <h6 class="text-bold">Jenis kelamin</h6>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_laki" value="Laki-laki">
-                                    <label class="form-check-label" for="jenis_kelamin_laki">
-
-                        <form>
-                            <div class="mb-3">
-                                <label for="nim" class="form-label">Nomor Induk Mahasiswa</label>
-                                <input type="text" class="form-control" id="nim">
-                            </div>
-                            <div class="mb-3">
-                                <label for="nama" class="form-label">Nama mahasiswa</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa">
-                            </div>
-                            <div class="mb-3">
-                                <label for="tgllahir" class="form-label">Tanggal lahir</label>
-                                <input type="date" class="form-control" id="tanggal_lahir">
-                            </div>
-                            <div class="mb-3">
-                                    <h6 class="text-bold">Jenis kelamin</h6>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="jenis_kelamin">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-
-                                        Laki-laki
-                                    </label>
-                                </div>
-                                <div class="form-check">
-
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_perempuan" value="Perempuan">
-                                    <label class="form-check-label" for="jenis_kelamin_perempuan">
-
-                                        Perempuan
-                                    </label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">+ Tambah</button>
-                        </form>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">NIM</th>
+                                    <th scope="col">Tanggal Lahir</th>
+                                    <th scope="col">Jenis Kelamin</th>
+                                    <th scope="col">
+                                        <span class="sr-only">Edit</span>
+                                    </th>
+                                    <th scope="col">
+                                        <span class="sr-only">Edit</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $query = "SELECT * FROM mahasiswa ORDER BY nim ASC";
+                                $result = mysqli_query($conn, $query);
+                                if ($result->num_rows > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $id_mahasiswa = $row['id_mahasiswa'];
+                                        $nama_mahasiswa = $row['nama_mahasiswa'];
+                                        $nim = $row['nim'];
+                                        $tanggal_lahir = $row['tanggal_lahir'];
+                                        $jenis_kelamin = $row['jenis_kelamin'];
+                                ?>
+                                        <tr>
+                                            <th scope="row"><?php echo $id_mahasiswa ?></th>
+                                            <td><?php echo $nama_mahasiswa ?></td>
+                                            <td><?php echo $nim ?></td>
+                                            <td><?php echo $tanggal_lahir ?></td>
+                                            <td><?php echo $jenis_kelamin ?></td>
+                                            <td>
+                                                <a href="#" class="link-primary">Edit</a>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="link-danger">Hapus</a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="12" class="px-6 py-4 text-gray-500">Tidak ada Data Mahasiswa.</td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

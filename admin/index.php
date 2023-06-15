@@ -28,7 +28,6 @@
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 </head>
 
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
@@ -51,7 +50,6 @@
           <a href="#" class="nav-link">Contact</a>
         </li>
       </ul>
-
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
@@ -110,6 +108,7 @@
                     <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                   </h3>
                   <p class="text-sm">I got your message bro</p>
+
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
               </div>
@@ -119,6 +118,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
+
                 <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
@@ -183,15 +183,17 @@
         <img src="/Riversky/assets/images/logoangkatan.png" alt="logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">21VerskyMin</span>
       </a>
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-          <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-sidebar">
-                <i class="fas fa-search fa-fw"></i>
-              </button>
-            </div>
+
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+
           </div>
         </div>
 
@@ -227,9 +229,19 @@
           </li>
           <li class="nav-item">
             <a href="mahasiswa.php" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+
+              <i class="nav-icon fas fa-plus"></i>
               <p>
                 Daftar Mahasiswa
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="tabel_mahasiswa.php" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Tabel Mahasiswa
+
               </p>
             </a>
           </li>
@@ -276,7 +288,7 @@
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
-                
+
               </div>
             </div>
             <!-- ./col -->

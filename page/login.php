@@ -1,4 +1,5 @@
 <?php
+
 ob_start();
 include "config/config.php";
 
@@ -33,8 +34,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 ob_end_flush();
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
