@@ -1,24 +1,29 @@
 <?php
-session_start();
 include('config.php'); // file koneksi ke database
 
-if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tanggal_lahir']) && isset($_POST['jenis_kelamin'])) {
-    $nama_mahasiswa = $_POST['nama_mahasiswa'];
-    $nim = $_POST['nim'];
-    $tanggal_lahir = $_POST['tanggal_lahir'];
-    $jenis_kelamin = $_POST['jenis_kelamin'];
+if (isset($_POST['submit'])) {
+    $nama_mahasiswa     = $_POST['nama_mahasiswa'];
+    $nim                = $_POST['nim'];
+    $tanggal_lahir      = $_POST['tanggal_lahir'];
+    $jenis_kelamin      = $_POST['jenis_kelamin'];
+    $berhasil           = "";
+    $gagal              = "";
 
     // cek apakah username sudah ada di database
     $query = "SELECT * FROM mahasiswa WHERE nim='$nim'";
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
-        echo "<script>alert('Mahasiswa dengan NIM tersebut telah terdaftar.'); document.location.href = '/apotech/admin/daftar_produk.php'</script>";
+        echo "<script>alert('Mahasiswa dengan NIM tersebut telah terdaftar.'); document.location.href = '/Riversky/admin/mahasiswa.php'</script>";
         exit();
     } else {
         $insert = "INSERT INTO mahasiswa (nama_mahasiswa, nim, tanggal_lahir, jenis_kelamin) VALUES ('$nama_mahasiswa', '$nim', '$tanggal_lahir', '$jenis_kelamin')";
-        mysqli_query($conn, $insert);
-        echo "<script>alert('Data mahasiswa baru berhasil ditambahkan!'); document.location.href = '/Riversky/admin/mahasiswa.php'</script>";
+        $queue = mysqli_query($conn, $insert);
+        if($queue){
+            $berhasil   = "Data berhasil diupload";
+        }else{
+            $gagal      = "Data gagal diupload";
+        }
     }
 }
 ?>
@@ -55,224 +60,6 @@ if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tan
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div>
-
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
-            </ul>
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.navbar -->
-
-        <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="/Riversky/assets/images/logoangkatan.png" alt="logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">21VerskyMin</span>
-            </a>
-
-
-            <!-- SidebarSearch Form -->
-            <div class="form-inline">
-                <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-sidebar">
-                            <i class="fas fa-search fa-fw"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="index.php" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Dashboard
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="berita.php" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Berita
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pencapaian.php" class="nav-link">
-                            <i class="nav-icon fas fa-image"></i>
-                            <p>
-                                Pencapaian
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="mahasiswa.php" class="nav-link">
-                            <i class="nav-icon fas fa-plus"></i>
-                            <p>
-                                Daftar Mahasiswa
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="tabel_mahasiswa.php" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
-                            <p>
-                                Tabel Mahasiswa
-
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-    </aside>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -281,13 +68,6 @@ if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tan
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0">Tambah Mahasiswa</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
-                        </ol>
-                    </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
@@ -299,8 +79,8 @@ if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tan
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-lg-12 position-static">
-                        <form action="mahasiswa.php" method="POST">
-                            <div class="mb-3">
+                        <form action="" method="POST">
+                        <div class="mb-3">
                                 <label for="nim" class="form-label">Nomor Induk Mahasiswa</label>
                                 <input type="text" name="nim" class="form-control" id="nim">
                             </div>
@@ -314,57 +94,126 @@ if (isset($_POST['nama_mahasiswa']) && isset($_POST['nim']) && isset($_POST['tan
                             </div>
                             <div class="mb-3">
                                 <h6 class="text-bold">Jenis kelamin</h6>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_laki" value="Laki-laki">
-                                    <label class="form-check-label" for="jenis_kelamin_laki">
-
-                        <form>
-                            <div class="mb-3">
-                                <label for="nim" class="form-label">Nomor Induk Mahasiswa</label>
-                                <input type="text" class="form-control" id="nim">
-                            </div>
-                            <div class="mb-3">
-                                <label for="nama" class="form-label">Nama mahasiswa</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa">
-                            </div>
-                            <div class="mb-3">
-                                <label for="tgllahir" class="form-label">Tanggal lahir</label>
-                                <input type="date" class="form-control" id="tanggal_lahir">
-                            </div>
-                            <div class="mb-3">
-                                    <h6 class="text-bold">Jenis kelamin</h6>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="jenis_kelamin">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-
-                                        Laki-laki
-                                    </label>
-                                </div>
-                                <div class="form-check">
-
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_perempuan" value="Perempuan">
-                                    <label class="form-check-label" for="jenis_kelamin_perempuan">
-
-                                        Perempuan
-                                    </label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_laki" value="Laki-laki">
+                                        <label class="form-check-label" for="jenis_kelamin_laki">
+                                            Laki-laki
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_perempuan" value="Perempuan">
+                                        <label class="form-check-label" for="jenis_kelamin_perempuan">
+                                            Perempuan
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">+ Tambah</button>
+                            <div class="col-12">
+                                <button type="submit" name="submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                        <div class="col-lg-12 position-static">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">NIM</th>
+                                        <th scope="col">Tanggal Lahir</th>
+                                        <th scope="col">Jenis Kelamin</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Hapus</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $query = "SELECT * FROM mahasiswa ORDER BY nim ASC";
+                                    $result = mysqli_query($conn, $query);
+                                    if ($result->num_rows > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $id_mahasiswa = $row['id_mahasiswa'];
+                                            $nama_mahasiswa = $row['nama_mahasiswa'];
+                                            $nim = $row['nim'];
+                                            $tanggal_lahir = $row['tanggal_lahir'];
+                                            $jenis_kelamin = $row['jenis_kelamin'];
+                                    ?>
+                                            <tr>
+                                                <th scope="row"><?php echo $id_mahasiswa ?></th>
+                                                <td><?php echo $nama_mahasiswa ?></td>
+                                                <td><?php echo $nim ?></td>
+                                                <td><?php echo $tanggal_lahir ?></td>
+                                                <td><?php echo $jenis_kelamin ?></td>
+                                                <td>
+                                                    <!-- Tombol Edit -->
+                                                    <a href="#" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal<?php echo $id_mahasiswa ?>">Edit</a>
+                                                </td>
+                                                <td>
+                                                    <!-- Tombol Hapus -->
+                                                    <a href="deletemahasiswa.php?id=<?php echo $id_mahasiswa ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</a>
+                                                </td>
+                                            </tr>
+                                            <!-- Modal Edit -->
+                                            <div class="modal fade" id="editModal<?php echo $id_mahasiswa ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?php echo $id_mahasiswa ?>" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editModalLabel<?php echo $id_mahasiswa ?>">Edit Mahasiswa</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Form Edit Mahasiswa -->
+                                                            <form action="editmahasiswa.php?id=<?php echo $id_mahasiswa ?>" method="POST">
+                                                                <div class="form-group">
+                                                                    <label for="edit-nama">Nama</label>
+                                                                    <input type="text" class="form-control" id="edit-nama" name="edit-nama" value="<?php echo $nama_mahasiswa ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit-nim">NIM</label>
+                                                                    <input type="text" class="form-control" id="edit-nim" name="edit-nim" value="<?php echo $nim ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit-tanggal-lahir">Tanggal Lahir</label>
+                                                                    <input type="date" class="form-control" id="edit-tanggal-lahir" name="edit-tanggal-lahir" value="<?php echo $tanggal_lahir ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit-jenis-kelamin">Jenis Kelamin</label>
+                                                                    <select class="form-control" id="edit-jenis-kelamin" name="edit-jenis-kelamin">
+                                                                        <option value="Laki-laki" <?php if ($jenis_kelamin == 'Laki-laki') echo 'selected' ?>>Laki-laki</option>
+                                                                        <option value="Perempuan" <?php if ($jenis_kelamin == 'Perempuan') echo 'selected' ?>>Perempuan</option>
+                                                                    </select>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <?php
+                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="7" class="px-6 py-4 text-gray-500">Tidak ada Data Mahasiswa.</td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
             </div>
         </section>
         <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <strong>21Versky &copy; 2023 </strong>
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Versi</b> 1.0.0
-        </div>
-    </footer>
-
+      
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
