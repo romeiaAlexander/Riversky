@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2023 at 04:09 AM
+-- Generation Time: Jun 18, 2023 at 12:26 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -24,18 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `berita`
---
-
-CREATE TABLE `berita` (
-  `id_berita` int(20) NOT NULL,
-  `judul_berita` varchar(255) NOT NULL,
-  `deskripsi_berita` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `login`
 --
 
@@ -50,8 +38,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`user_id`, `username`, `password`) VALUES
-(130120, 'admin', '123456'),
-(321321, 'valerie', '1111');
+(130120, 'admin', '202cb962ac59075b964b07152d234b70'),
+(321321, 'valerie', 'b59c67bf196a4758191e42f76670ceba');
 
 -- --------------------------------------------------------
 
@@ -72,11 +60,7 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id_mahasiswa`, `nama_mahasiswa`, `nim`, `tanggal_lahir`, `jenis_kelamin`) VALUES
-(1, 'Vallerie Britania Sepang', '211011060018', '2004-01-12', ''),
-(2, 'Albani Boutje Johanes', '211011060022', '2003-06-20', ''),
-(3, 'Ewangelio M. Lengkong', '211011060079', '2004-03-29', ''),
-(4, 'Erick Owen Indri Kalumata', '21101106055', '2003-10-28', 'Laki-laki'),
-(5, 'Roma Mantiri', '211011060024', '1945-08-17', 'Laki-laki');
+(1, 'Albani Boutje Johanes', '211011060022', '2003-06-20', 'Laki-laki');
 
 -- --------------------------------------------------------
 
@@ -86,20 +70,42 @@ INSERT INTO `mahasiswa` (`id_mahasiswa`, `nama_mahasiswa`, `nim`, `tanggal_lahir
 
 CREATE TABLE `pencapaian` (
   `id_pencapaian` int(20) NOT NULL,
+  `nama_pemenang` varchar(255) NOT NULL,
   `judul_pencapaian` varchar(255) NOT NULL,
   `deskripsi_pencapaian` varchar(500) NOT NULL,
-  `tanggal_pencapaian` date NOT NULL
+  `tanggal_pencapaian` date NOT NULL,
+  `gambar_pencapaian` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pencapaian`
+--
+
+INSERT INTO `pencapaian` (`id_pencapaian`, `nama_pemenang`, `judul_pencapaian`, `deskripsi_pencapaian`, `tanggal_pencapaian`, `gambar_pencapaian`) VALUES
+(1, 'Albani Boutje Johanes', 'Juara 1 Game Dev', 'Juara 1 lomba Game Dev dari Sistem Informasi dalam rangka Dies Natalis UNSRAT', '2022-09-07', 'capy.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visimisi`
+--
+
+CREATE TABLE `visimisi` (
+  `id_visimisi` int(20) NOT NULL,
+  `visi` varchar(255) NOT NULL,
+  `misi` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `visimisi`
+--
+
+INSERT INTO `visimisi` (`id_visimisi`, `visi`, `misi`) VALUES
+(1, 'Menjadi jembatan pertemuan dan pemersatu bagi mahasiswa dengan memiliki jiwa yang independen dan bergerak secara sistematis, serta mampu unggul dalam bidang akademik maupun non-akademik.', 'Menjadikan mahasiswa yang memiliki rasa solidaritas dengan mengoptimalkan kualitas diri, berinovasi, dan berkreasi dengan berbagi antar pengalaman dan ilmu');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `berita`
---
-ALTER TABLE `berita`
-  ADD PRIMARY KEY (`id_berita`);
 
 --
 -- Indexes for table `login`
@@ -120,26 +126,32 @@ ALTER TABLE `pencapaian`
   ADD PRIMARY KEY (`id_pencapaian`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `visimisi`
 --
+ALTER TABLE `visimisi`
+  ADD PRIMARY KEY (`id_visimisi`);
 
 --
--- AUTO_INCREMENT for table `berita`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `berita`
-  MODIFY `id_berita` int(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id_mahasiswa` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_mahasiswa` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pencapaian`
 --
 ALTER TABLE `pencapaian`
-  MODIFY `id_pencapaian` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pencapaian` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `visimisi`
+--
+ALTER TABLE `visimisi`
+  MODIFY `id_visimisi` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

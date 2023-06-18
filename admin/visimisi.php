@@ -1,21 +1,23 @@
 <?php
 include('config.php');
 
-if (isset($_POST['submit'])) {
-    $judul_berita = $_POST['judul_berita'];
-    $deskripsi_berita = $_POST['deskripsi_berita'];
+if(isset($_POST['submit'])){
+    $visi      = $_POST['visi'];
+    $misi      = $_POST['misi'];
 
-    $query = "INSERT INTO berita (judul_berita, deskripsi_berita) VALUES ('$judul_berita', '$deskripsi_berita')";
-    if (mysqli_query($conn, $query)) 
-    {
-        header('Location: index.php?admin=berita');
-        exit();
-    } else {
-        echo "Data tidak bisa ditampilkan" . mysqli_error($conn);
+    $query              = "UPDATE visimisi
+                            SET visi='$visi',
+                                misi='$misi'";
+
+    if(mysqli_query($conn, $query)){
+        echo "<script type='text/javascript'>alert('Berhasil UPDATE!'); window.location ='index.php?admin=visimisi'; </script>";
+    }else{
+        echo "<script type='text/javascript'>alert('Gagal UPDATE!'); window.location ='index.php?admin=visimisi'; </script>";
+        die("Gagal menyimpan ke database". mysqli_error($conn));
     }
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,21 +67,26 @@ if (isset($_POST['submit'])) {
             <section class="content">
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-12 position-static">
-                            <form action="" method="post">
-                                <div class="mb-3">
-                                    <label for="judul_berita" class="form-label">Judul berita</label>
-                                    <input type="text" class="form-control" name="judul_berita" id="judul_berita">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="deskripsi_berita" class="form-label">Deskripsi berita</label>
-                                    <input type="text" class="form-control" name="deskripsi_berita" id="deskripsi_berita">
-                                </div>
-                                <button type="submit" name="submit" class="btn btn-primary">submit</button>
-                            </form>
-                        </div>
-                    </div>
+                    <?php
+                    $query1 = "SELECT * FROM visimisi";
+                    $result = mysqli_query($conn, $query1);
+                    $row    = mysqli_fetch_assoc($result);            
+                    echo    '<div class="row">';
+                    echo    '<div class="col-lg-12 position-static">';
+                    echo    '<form action="" method="post">';
+                    echo    '<div class="mb-3">';
+                    echo    '<label for="visi" class="form-label">Visi</label>';
+                    echo    '<input type="text" class="form-control" name="visi" id="visi" value="'. $row['visi']. '">';
+                    echo    '</div>';
+                    echo    '<div class="mb-3">';
+                    echo    '<label for="misi" class="form-label">Misi</label>';
+                    echo    '<input type="text" class="form-control" name="misi" id="misi" value="'. $row['misi'].'">';
+                    echo    '</div>';
+                    echo    '<button type="submit" name="submit" class="btn btn-primary">Ubah Visi Misi</button>';
+                    echo    '</form>';
+                    echo    '</div>';
+                    echo    '</div>';
+                    ?>
                 </div>
             </section>
             <!-- /.content -->
