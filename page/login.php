@@ -1,12 +1,15 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> coder
 ob_start();
+=======
+>>>>>>> b72bb4172f14c5050d9f22de478266d344eb1021
 include "config/config.php";
 
-if (isset($_POST['username']) && isset($_POST['password'])) {
+if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = md5($_POST['password']);
 
@@ -20,17 +23,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         exit();
     } else {
         $login = mysqli_query($conn, "SELECT * FROM login WHERE username='$username' AND password='$password'");
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
 =======
 >>>>>>> coder
+=======
+>>>>>>> b72bb4172f14c5050d9f22de478266d344eb1021
         if (mysqli_num_rows($login) > 0) {
             $_SESSION['username'] = $username;
-            ob_end_clean();
-            //header("Location: admin/index.php");
             echo "<script>window.location.href='admin/index.php'</script>";
-            //exit();
         } else {
             echo "<script>alert('Username atau Password anda salah')</script>";
             echo "<meta http-equiv='refresh' content='1 url=index.php'>";
@@ -38,7 +41,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         }
     }
 }
-ob_end_flush();
 ?>
 
 
@@ -73,12 +75,18 @@ ob_end_flush();
                 <i class="bx bx-lock"></i>
             </div>
             <div class="input-box">
+<<<<<<< HEAD
                 <input type="submit" class="input-submit" value="Login">
 <<<<<<< HEAD
               </div>
 =======
             </div>
 >>>>>>> coder
+=======
+                <input type="submit" name="submit" class="input-submit" value="Login">
+            </div>
+
+>>>>>>> b72bb4172f14c5050d9f22de478266d344eb1021
         </div>
     </div>
 </body>

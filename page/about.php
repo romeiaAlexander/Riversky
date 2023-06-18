@@ -1,6 +1,3 @@
-<?php
-include('../Riversky/config/config.php')
-?>
 <html>
 
 <head>
@@ -57,19 +54,20 @@ include('../Riversky/config/config.php')
                 Mengenai 21Versky
               </h2>
             </div>
-            <p>
-              Visi : <br>
-              Menjadi jembatan pertemuan dan pemersatu bagi mahasiswa dengan memiliki
-              jiwa yang independen dan bergerak secara sistematis, serta mampu
-              unggul dalam bidang akademik maupun non-akademik. <br> <br>
-              Misi : <br>
-              1. Menjadikan mahasiswa yang memiliki rasa solidaritas dengan mengoptimalkan kualitas diri, berinovasi, dan berkreasi
-              dengan berbagi antar pengalaman dan ilmu
-
-            </p>
-            <a href="">
-              Read More
-            </a>
+            <?php
+            include('config/config.php');
+            $query  = "SELECT * FROM visimisi";
+            $result = mysqli_query($conn, $query);
+            $row    = mysqli_fetch_assoc($result);
+            echo  '<p>Visi :';
+            echo  '<br>'.$row['visi'].'<br> <br>';
+            echo  'Misi :';
+            echo  '<br>'.$row['misi'].'<br>';
+            echo  '</p>';
+            echo  '<a href="">';
+            echo  'Read More';
+            echo  '</a>';
+            ?>
           </div>
         </div>
       </div>

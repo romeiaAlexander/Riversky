@@ -1,3 +1,32 @@
+<?php
+include('config.php');
+
+if(isset($_POST['submit'])){
+    $nama               = $_POST['nama_pemenang'];
+    $judul              = $_POST['judul_pencapaian'];
+    $deskripsi          = $_POST['deskripsi_pencapaian'];
+    $tanggal            = $_POST['tanggal_pencapaian'];
+    $gambar             = $_FILES['gambar_pencapaian']['name'];
+    $gambar_tmp_name    = $_FILES['gambar_pencapaian']['tmp_name'];
+    $gambar_folder      = 'uploaded_img/'. $gambar;
+
+    if(empty($judul) || empty($deskripsi) || empty($tanggal) || empty($gambar)){
+        $pesan[]        = "<script>alert('tolong di isi datanya')</script>";
+    }else{
+        $insert         = "INSERT INTO pencapaian (nama_pemenang, judul_pencapaian, deskripsi_pencapaian, tanggal_pencapaian, gambar_pencapaian)
+                            VALUES ('$nama','$judul','$deskripsi','$tanggal','$gambar')";
+        $result         = mysqli_query($conn, $insert);
+        if($result){
+            move_uploaded_file($gambar_tmp_name, $gambar_folder);
+            $pesan[]    = "<script>alert('Data telah terupload')</script>";
+        }else{
+            $pesan[]    = "<script>alert('Data tidak dapat terupload')</script>";
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,218 +55,11 @@
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div>
-
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
-            </ul>
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.navbar -->
-
-        <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="/Riversky/assets/images/logoangkatan.png" alt="logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">21VerskyMin</span>
-            </a>
-
-
-            <!-- SidebarSearch Form -->
-            <div class="form-inline">
-                <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-sidebar">
-                            <i class="fas fa-search fa-fw"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="index.php" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Dashboard
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="berita.php" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Berita
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item menu-open">
-                        <a href="pencapaian.php" class="nav-link">
-                            <i class="nav-icon fas fa-image"></i>
-                            <p>
-                                Pencapaian
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="mahasiswa.php" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
-                            <p>
-                                Daftar Mahasiswa
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-    </aside>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -247,13 +69,6 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0">Tambah Pencapaian</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
-                        </ol>
-                    </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
@@ -265,34 +80,133 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-lg-12 position-static">
-                        <form>
+                        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="namapemenang" class="form-label">Nama pemenang</label>
+                                <input type="text" class="form-control" name="nama_pemenang" id="nama_pemenang">
+                            </div>
                             <div class="mb-3">
                                 <label for="judulpencapaian" class="form-label">Judul pencapaian</label>
-                                <input type="text" class="form-control" id="judul_pencapaian">
+                                <input type="text" class="form-control" name="judul_pencapaian" id="judul_pencapaian">
                             </div>
                             <div class="mb-3">
                                 <label for="deskpencapaian" class="form-label">Deskripsi pencapaian</label>
-                                <input type="text" class="form-control" id="deskripsi_pencapaian">
+                                <input type="text" class="form-control" name="deskripsi_pencapaian" id="deskripsi_pencapaian">
                             </div>
                             <div class="mb-3">
                                 <label for="tglpencapaian" class="form-label">Tanggal pencapaian</label>
-                                <input type="date" class="form-control" id="tanggal_pencapaian">
+                                <input type="date" class="form-control" name="tanggal_pencapaian" id="tanggal_pencapaian">
                             </div>
-                            <button type="submit" class="btn btn-primary">+ Tambah</button>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Gambar pencapaian</label>
+                                <input class="form-control" accept="image/png, image/jpeg, image/jpg" name="gambar_pencapaian" type="file" id="formFile">
+                            </div>
+                            <button type="submit" name="submit" class="btn btn-primary" onclick="return confirm('Apakah anda sudah meresize foto?')">Submit</button>
                         </form>
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                        <div class="col-lg-12 position-static">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama Pemenang</th>
+                                        <th scope="col">Judul Pencapaian</th>
+                                        <th scope="col">Deskripsi Pencapaian</th>
+                                        <th scope="col">Tanggal Pencapaian</th>
+                                        <th scope="col">Gambar pencapaian</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Hapus</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $query1 = "SELECT * FROM pencapaian ORDER BY id_pencapaian ASC";
+                                    $result1 = mysqli_query($conn, $query1);
+                                    if ($result1->num_rows > 0) {
+                                        while ($row = mysqli_fetch_assoc($result1)) {
+                                            $id_pencapaian          = $row['id_pencapaian'];
+                                            $nama_pemenang          = $row['nama_pemenang'];
+                                            $judul_pencapaian       = $row['judul_pencapaian'];
+                                            $deskripsi_pencapaian   = $row['deskripsi_pencapaian'];
+                                            $tanggal_pencapaian     = $row['tanggal_pencapaian'];
+                                            $gambar_pencapaian      = $row['gambar_pencapaian'];
+                                    ?>
+                                            <tr>
+                                                <th scope="row"><?php echo $id_pencapaian ?></th>
+                                                <td><?php echo $nama_pemenang ?></td>
+                                                <td><?php echo $judul_pencapaian ?></td>
+                                                <td><?php echo $deskripsi_pencapaian ?></td>
+                                                <td><?php echo $tanggal_pencapaian ?></td>
+                                                <td><img src="uploaded_img/<?php echo $gambar_pencapaian ?>" alt=""></td>
+                                                <td>
+                                                    <!-- Tombol Edit -->
+                                                    <a href="#" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#editModal<?php echo $id_pencapaian ?>">Edit</a>
+                                                </td>
+                                                <td>
+                                                    <!-- Tombol Hapus -->
+                                                    <a href="deletepencapaian.php?id=<?php echo $id_pencapaian ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</a>
+                                                </td>
+                                            </tr>
+                                            <!-- Modal Edit -->
+                                            <div class="modal fade" id="editModal<?php echo $id_pencapaian ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?php echo $id_pencapaian ?>" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editModalLabel<?php echo $id_pencapaian ?>">Edit Mahasiswa</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Form Edit Mahasiswa -->
+                                                            <form action="editpencapaian.php?id=<?php echo $id_pencapaian ?>" method="POST" enctype="multipart/form-data">
+                                                                <div class="form-group">
+                                                                    <label for="edit-nama">Nama Pemenang</label>
+                                                                    <input type="text" class="form-control" id="edit-nama-pemenang" name="edit-nama-pemenang" value="<?php echo $nama_pemenang ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit-judul">Judul Pencapaian</label>
+                                                                    <input type="text" class="form-control" id="edit-judul-pencapaian" name="edit-judul-pencapaian" value="<?php echo $judul_pencapaian ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit-deskripsi">Deskripsi Pencapaian</label>
+                                                                    <input type="text" class="form-control" id="edit-deskripsi-pencapaian" name="edit-deskripsi-pencapaian" value="<?php echo $deskripsi_pencapaian ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="edit-tanggal">Tanggal Pencapaian</label>
+                                                                    <input type="date" class="form-control" id="edit-tanggal-pencapaian" name="edit-tanggal-pencapaian" value="<?php echo $tanggal_pencapaian ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="formFile" class="form-label">Gambar pencapaian</label>
+                                                                    <input class="form-control" accept="image/png, image/jpeg, image/jpg" name="edit-gambar-pencapaian" type="file" id="formFile" value="<?php echo $gambar_pencapaian ?>">
+                                                                </div>
+                                                                <button type="submit" name="edit-submit" class="btn btn-primary">Simpan</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <?php
+                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="7" class="px-6 py-4 text-gray-500">Tidak ada Data Mahasiswa.</td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
             </div>
         </section>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <strong>21Versky &copy; 2023 </strong>
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Versi</b> 1.0.0
-        </div>
-    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
