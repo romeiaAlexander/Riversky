@@ -61,9 +61,6 @@ require_once 'config/config.php';
                   <a class="nav-link" href="index.php?river=service"> Achievement </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#contactLink">Contact</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link" href="index.php?river=login"> login </a>
                 </li>
               </ul>
@@ -142,7 +139,10 @@ require_once 'config/config.php';
 				break;
       case 'login':
         include "page/login.php";
-        break;			
+        break;
+      case 'dev':
+        include "page/team.php";
+        break;
 			default:
 				echo "<center><h3>Maaf. Halaman tidak di temukan !</h3></center>";
 				break;
@@ -182,16 +182,16 @@ require_once 'config/config.php';
               </h4>
               <ul class="  ">
                 <li class=" active">
-                  <a class="" href="index.html">Home <span class="sr-only">(current)</span></a>
+                  <a class="" href="index.php?river=home">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="">
-                  <a class="" href="about.html"> About Us</a>
+                  <a class="" href="index.php?river=about"> About Us</a>
                 </li>
                 <li class="">
-                  <a class="" href="service.html"> Achievement </a>
+                  <a class="" href="index.php?river=service"> Achievement </a>
                 </li>
                 <li class="">
-                  <a class="" href="#contactLink">Contact</a>
+                  <a class="" href="index.php?river=login">Login</a>
                 </li>
               </ul>
             </div>
@@ -257,8 +257,8 @@ require_once 'config/config.php';
     <section class="container-fluid footer_section">
       <div class="container">
         <p>
-          © <span id="displayYear">2023</span> All Rights Reserved By
-          <a href="https://html.design/">21versky</a>
+          <span id="displayYear">2023</span> All Rights Reserved By
+          <a href="index.php?river=dev">DEVELOPER 21versky</a>
         </p>
       </div>
     </section>

@@ -50,31 +50,25 @@
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>100</h3>
-
-                <p>Total Berita</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <?php
+              include('config.php');
+
+              $query = "SELECT COUNT(*) as total FROM pencapaian";
+              $result = mysqli_query($conn, $query);
+              $row = mysqli_fetch_assoc($result);
+              $totalData = $row['total'];
+
+              echo '<h3>'.$totalData.'<sup style="font-size: 20px"></sup></h3>';
+              ?>
 
                 <p>Total Pencapaian</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="index.php?admin=pencapaian" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -82,27 +76,21 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+              <?php
+              include('config.php');
+
+              $query = "SELECT COUNT(*) as total FROM mahasiswa";
+              $result = mysqli_query($conn, $query);
+              $row = mysqli_fetch_assoc($result);
+              $totalData = $row['total'];
+
+              echo '<h3>'.$totalData.'<sup style="font-size: 20px"></sup></h3>';
+              ?>
 
                 <p>Mahasiswa Aktif</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Kunjungan Website</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

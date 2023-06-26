@@ -154,13 +154,15 @@
                 About Us
               </h2>
             </div>
-            <p>
-              Visi  : <br>
-              Menjadi jembatan pertemuan dan pemersatu bagi mahasiswa dengan memiliki<br>
-              jiwa yang independen dan bergerak secara sistematis, serta mampu<br>
-              unggul dalam bidang akademik maupun non-akademik. 
-            </p>
-            <a href="">
+            <?php
+            include('config/config.php');
+            $query  = "SELECT * FROM visimisi";
+            $result = mysqli_query($conn, $query);
+            $row    = mysqli_fetch_assoc($result);
+            echo  '<p>Visi :';
+            echo  '<br>'.$row['visi'].'<br> <br>';
+            ?>
+            <a href="index.php?river=about">
               Read More
             </a>
           </div>

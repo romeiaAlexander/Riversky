@@ -71,10 +71,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php?admin=berita" class="nav-link">
+            <a href="index.php?admin=visimisi" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Berita
+                Visi dan Misi
               </p>
             </a>
           </li>
@@ -117,8 +117,8 @@
             case 'home':
                 include "beranda.php";
                 break;
-            case 'berita':
-                include "berita.php";
+            case 'visimisi':
+                include "visimisi.php";
                 break;
             case 'pencapaian':
                 include "pencapaian.php";
